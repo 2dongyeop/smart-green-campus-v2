@@ -23,14 +23,27 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
+[기존에 구현한 API server](https://github.com/2dongyeop/smart-green-campus)를 아래와 같은 변경사항을 적용하여 다시 구현합니다.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- #### 기존 구성
+  - Language : JavaScript
+  - Framework : Node.js
+  - Database : MySQL
+
+- #### 변경 구성 
+  - Language : TypeScript
+  - Framework : Nest.js
+  - Database : PostgreSQL
+
+<br/>
 
 ## Installation
 
 ```bash
 $ npm install
 ```
+
+<br/>
 
 ## Running the app
 
@@ -45,6 +58,8 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+<br/>
+
 ## Test
 
 ```bash
@@ -58,15 +73,13 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+<br/>
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+<br/>
 
 ## License
 
