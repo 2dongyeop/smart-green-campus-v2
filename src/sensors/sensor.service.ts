@@ -1,17 +1,21 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Sensor } from './sensor.model';
-import { v1 as uuid } from 'uuid';
+import { Sensor } from './sensor.entity';
+import { SensorRepository } from './sensor.repository';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class SensorService {
-  private sensors: Sensor[] = [];
+  constructor(
+    @InjectRepository(Sensor)
+    private sensorRepository: SensorRepository,
+  ) {}
 
-  getAllSensors(): Sensor[] {
-    return this.sensors;
-  }
+  // getAllSensors(): Sensor[] {
+  //   return this.sensors;
+  // }
 
-  getSensorById(id: string): Sensor {
-    const found = this.sensors.find((sensor) => sensor.id === id);
+  async getSensorById(id: number): Promise<Sensor> {
+    const found = await this.sensorRepository.findOne({ where: { id: id } });
 
     if (!found) {
       throw new NotFoundException(`Can't find Sensor with id ${id}`);
@@ -20,27 +24,26 @@ export class SensorService {
     return found;
   }
 
-  createSensor(sensor_name, location, value) {
-    const sensor: Sensor = {
-      id: uuid(),
+  async createSensor(sensor_name, location, value): Promise<Sensor> {
+    const sensor = this.sensorRepository.create({
       sensor_name,
       location,
       value,
-    };
+    });
 
-    this.sensors.push(sensor);
+    await this.sensorRepository.save(sensor);
     return sensor;
   }
 
-  deleteSensor(id: string): void {
-    const found = this.getSensorById(id);
-
-    this.sensors = this.sensors.filter((sensor) => sensor.id !== found.id);
-  }
-
-  updateSensorValue(id: string, value: number): Sensor {
-    const sensor = this.getSensorById(id);
-    sensor.value = value;
-    return sensor;
-  }
+  // deleteSensor(id: string): void {
+  //   const found = this.getSensorById(id);
+  //
+  //   this.sensors = this.sensors.filter((sensor) => sensor.id !== found.id);
+  // }
+  //
+  // updateSensorValue(id: string, value: number): Sensor {
+  //   const sensor = this.getSensorById(id);
+  //   sensor.value = value;
+  //   return sensor;
+  // }
 }

@@ -1,11 +1,11 @@
 import { BadRequestException, PipeTransform } from '@nestjs/common';
-import { SensorDivision } from '../sensor.model';
+import { SensorName } from '../sensor-name.enum';
 
 export class SensorNameValidationPipe implements PipeTransform {
   readonly SensorNameOptions = [
-    SensorDivision.TEMPERATURE,
-    SensorDivision.HUMMIDITY,
-    SensorDivision.SOLAR,
+    SensorName.TEMPERATURE,
+    SensorName.HUMMIDITY,
+    SensorName.SOLAR,
   ];
 
   transform(sensor_name: any): any {
