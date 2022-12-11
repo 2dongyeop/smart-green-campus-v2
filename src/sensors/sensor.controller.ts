@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes, ValidationPipe } from "@nestjs/common";
 import { SensorService } from './sensor.service';
 import { Sensor, SensorDivision } from './sensor.model';
-import { CreateSensorDto } from './dto/create-sensor.dto';
+import { SensorNameValidationPipe } from './pipes/sensor-name-validation.pipe';
 
 @Controller('sensors')
 export class SensorController {
@@ -18,13 +18,18 @@ export class SensorController {
   }
 
   @Post()
-  createSensor(@Body() createSensorDto: CreateSensorDto): Sensor {
-    return this.sensorsService.createSensor(createSensorDto);
+  @UsePipes(ValidationPipe)
+  createSensor(
+    @Body('sensor_name', SensorNameValidationPipe) sensor_name: SensorDivision,
+    @Body('location') location: string,
+    @Body('value') value: number,
+  ): Sensor {
+    return this.sensorsService.createSensor(sensor_name, location, value);
   }
 
-  @Delete('/id')
+  @Delete('/:id')
   deleteSensor(@Param('id') id: string): void {
-    return this.sensorsService.deleteSensor(id);
+    this.sensorsService.deleteSensor(id);
   }
 
   @Patch('/:id/value')

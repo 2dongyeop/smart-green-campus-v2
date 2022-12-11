@@ -1,7 +1,6 @@
-import { Get, Injectable } from '@nestjs/common';
-import { Sensor, SensorDivision } from './sensor.model';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Sensor } from './sensor.model';
 import { v1 as uuid } from 'uuid';
-import { CreateSensorDto } from "./dto/create-sensor.dto";
 
 @Injectable()
 export class SensorService {
@@ -12,12 +11,16 @@ export class SensorService {
   }
 
   getSensorById(id: string): Sensor {
-    return this.sensors.find((sensor) => sensor.id === id);
+    const found = this.sensors.find((sensor) => sensor.id === id);
+
+    if (!found) {
+      throw new NotFoundException(`Can't find Sensor with id ${id}`);
+    }
+
+    return found;
   }
 
-  createSensor(createSensorDto: CreateSensorDto) {
-    const { sensor_name, location, value } = createSensorDto;
-
+  createSensor(sensor_name, location, value) {
     const sensor: Sensor = {
       id: uuid(),
       sensor_name,
@@ -30,7 +33,9 @@ export class SensorService {
   }
 
   deleteSensor(id: string): void {
-    this.sensors = this.sensors.filter((sensor) => sensor.id !== id);
+    const found = this.getSensorById(id);
+
+    this.sensors = this.sensors.filter((sensor) => sensor.id !== found.id);
   }
 
   updateSensorValue(id: string, value: number): Sensor {
