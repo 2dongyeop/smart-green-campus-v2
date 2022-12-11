@@ -10,9 +10,9 @@ export class SensorService {
     private sensorRepository: SensorRepository,
   ) {}
 
-  // getAllSensors(): Sensor[] {
-  //   return this.sensors;
-  // }
+  async getAllSensors(): Promise<Sensor[]> {
+    return this.sensorRepository.find();
+  }
 
   async getSensorById(id: number): Promise<Sensor> {
     const found = await this.sensorRepository.findOne({ where: { id: id } });
@@ -35,15 +35,21 @@ export class SensorService {
     return sensor;
   }
 
-  // deleteSensor(id: string): void {
-  //   const found = this.getSensorById(id);
-  //
-  //   this.sensors = this.sensors.filter((sensor) => sensor.id !== found.id);
-  // }
-  //
-  // updateSensorValue(id: string, value: number): Sensor {
-  //   const sensor = this.getSensorById(id);
-  //   sensor.value = value;
-  //   return sensor;
-  // }
+  async deleteSensor(id: number): Promise<void> {
+    const result = await this.sensorRepository.delete(id);
+
+    if (result.affected === 0) {
+      throw new NotFoundException(`Can't find Sensor with id ${id}`);
+    }
+    console.log('result', result);
+  }
+
+  async updateSensorValue(id: number, value: number): Promise<Sensor> {
+    const sensor = await this.getSensorById(id);
+
+    sensor.value = value;
+    await this.sensorRepository.save(sensor);
+
+    return sensor;
+  }
 }
