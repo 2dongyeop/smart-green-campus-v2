@@ -2,9 +2,11 @@ import {
   BaseEntity,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
+import { Sensor } from '../sensors/sensor.entity';
 
 @Entity()
 @Unique(['username'])
@@ -17,4 +19,7 @@ export class User extends BaseEntity {
 
   @Column()
   password: string;
+
+  @OneToMany((type) => Sensor, (sensor) => sensor.user, { eager: true })
+  sensors: Sensor[];
 }

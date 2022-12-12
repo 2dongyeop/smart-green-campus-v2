@@ -1,5 +1,12 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { SensorName } from './sensor-name.enum';
+import { User } from '../auth/user.entity';
 
 @Entity()
 export class Sensor extends BaseEntity {
@@ -14,4 +21,7 @@ export class Sensor extends BaseEntity {
 
   @Column()
   value: number;
+
+  @ManyToOne((type) => User, (user) => user.sensors, { eager: false })
+  user: User;
 }

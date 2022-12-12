@@ -7,6 +7,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -14,14 +15,18 @@ import { SensorService } from './sensor.service';
 import { SensorName } from './sensor-name.enum';
 import { SensorNameValidationPipe } from './pipes/sensor-name-validation.pipe';
 import { Sensor } from './sensor.entity';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from '../auth/get-user.decorator';
+import { User } from '../auth/user.entity';
 
 @Controller('sensors')
+@UseGuards(AuthGuard())
 export class SensorController {
   constructor(private sensorsService: SensorService) {}
 
   @Get('/')
-  getAllSensors(): Promise<Sensor[]> {
-    return this.sensorsService.getAllSensors();
+  getAllSensors(@GetUser() user: User): Promise<Sensor[]> {
+    return this.sensorsService.getAllSensors(user);
   }
 
   @Get('/:id')
@@ -35,8 +40,9 @@ export class SensorController {
     @Body('sensor_name', SensorNameValidationPipe) sensor_name: SensorName,
     @Body('location') location: string,
     @Body('value') value: number,
+    @GetUser() user: User,
   ): Promise<Sensor> {
-    return this.sensorsService.createSensor(sensor_name, location, value);
+    return this.sensorsService.createSensor(sensor_name, location, value, user);
   }
 
   @Delete('/:id')

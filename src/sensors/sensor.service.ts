@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Sensor } from './sensor.entity';
 import { SensorRepository } from './sensor.repository';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from '../auth/user.entity';
 
 @Injectable()
 export class SensorService {
@@ -10,8 +11,13 @@ export class SensorService {
     private sensorRepository: SensorRepository,
   ) {}
 
-  async getAllSensors(): Promise<Sensor[]> {
-    return this.sensorRepository.find();
+  async getAllSensors(user: User): Promise<Sensor[]> {
+    const query = this.sensorRepository.createQueryBuilder('sensor');
+
+    query.where('sensor.user_id = :user_id', { user_id: user.id });
+
+    const sensors = await query.getMany();
+    return sensors;
   }
 
   async getSensorById(id: number): Promise<Sensor> {
@@ -24,11 +30,12 @@ export class SensorService {
     return found;
   }
 
-  async createSensor(sensor_name, location, value): Promise<Sensor> {
+  async createSensor(sensor_name, location, value, user): Promise<Sensor> {
     const sensor = this.sensorRepository.create({
       sensor_name,
       location,
       value,
+      user,
     });
 
     await this.sensorRepository.save(sensor);
