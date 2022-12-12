@@ -1,7 +1,8 @@
 # ignore by 2dongyeop
 *config*
 docker
-
+*jwt.strategy*
+*auth.module*
 
 
 # compiled output
