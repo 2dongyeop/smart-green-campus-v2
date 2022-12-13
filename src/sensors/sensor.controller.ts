@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   ParseIntPipe,
   Patch,
@@ -22,10 +23,12 @@ import { User } from '../auth/user.entity';
 @Controller('sensors')
 @UseGuards(AuthGuard())
 export class SensorController {
+  private logger = new Logger('BoardController');
   constructor(private sensorsService: SensorService) {}
 
   @Get('/')
   getAllSensors(@GetUser() user: User): Promise<Sensor[]> {
+    this.logger.verbose(`User ${user.username} trying to get all sensors`);
     return this.sensorsService.getAllSensors(user);
   }
 
@@ -42,6 +45,7 @@ export class SensorController {
     @Body('value') value: number,
     @GetUser() user: User,
   ): Promise<Sensor> {
+    this.logger.verbose(`User ${user.username} create a new sensor.`);
     return this.sensorsService.createSensor(sensor_name, location, value, user);
   }
 
