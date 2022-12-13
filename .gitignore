@@ -2,8 +2,6 @@
 *config*
 docker
 *jwt.strategy*
-*auth.module*
-
 
 # compiled output
 /dist
