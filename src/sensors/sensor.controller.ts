@@ -46,8 +46,11 @@ export class SensorController {
   }
 
   @Delete('/:id')
-  deleteSensor(@Param('id', ParseIntPipe) id: number): void {
-    this.sensorsService.deleteSensor(id);
+  deleteSensor(
+    @Param('id', ParseIntPipe) id: number,
+    @GetUser() user: User,
+  ): Promise<void> {
+    return this.sensorsService.deleteSensor(id, user);
   }
 
   @Patch('/:id/value')

@@ -42,12 +42,13 @@ export class SensorService {
     return sensor;
   }
 
-  async deleteSensor(id: number): Promise<void> {
+  async deleteSensor(id: number, user: User): Promise<void> {
     const result = await this.sensorRepository.delete(id);
 
-    if (result.affected === 0) {
-      throw new NotFoundException(`Can't find Sensor with id ${id}`);
+    if (result.affected == 0) {
+      throw new NotFoundException(`해당 Id를 가진 재고는 존재하지 않습니다.`);
     }
+
     console.log('result', result);
   }
 
