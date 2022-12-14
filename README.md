@@ -37,6 +37,19 @@
 
 <br/>
 
+## Document
+- [Setting files](https://github.com/2dongyeop/smart-green-campus-v2/blob/main/document/setting.md)
+
+
+<br/>
+
+## Version
+- OS : MAC Ventura 13.0.1(22A400)
+- node : v16.16.0
+
+
+<br/>
+
 ## Installation
 
 ```bash
