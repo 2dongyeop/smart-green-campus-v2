@@ -19,7 +19,7 @@ import { Sensor } from '../persistence/sensor.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../auth/web/get-user.decorator';
 import { User } from '../../auth/persistence/user.entity';
-import {ReadSensorDto} from "./dto/read-sensor.dto";
+import { ReadSensorDto } from './dto/read-sensor.dto';
 
 @Controller('sensors')
 @UseGuards(AuthGuard())
@@ -34,7 +34,7 @@ export class SensorController {
   }
 
   @Get('/:id')
-  getSensorById(@Param('id', ParseIntPipe) id: number): Promise<Sensor> {
+  getSensorById(@Param('id', ParseIntPipe) id: number): Promise<ReadSensorDto> {
     return this.sensorsService.getSensorById(id);
   }
 
@@ -62,7 +62,7 @@ export class SensorController {
   updateSensorValue(
     @Param('id', ParseIntPipe) id: number,
     @Body('value') value: number,
-  ): Promise<Sensor> {
+  ): Promise<ReadSensorDto> {
     return this.sensorsService.updateSensorValue(id, value);
   }
 }

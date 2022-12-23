@@ -21,7 +21,7 @@ export class SensorService {
     return sensors;
   }
 
-  async getSensorById(id: number): Promise<Sensor> {
+  async getSensorById(id: number): Promise<ReadSensorDto> {
     const found = await this.sensorRepository.findOne({ where: { id: id } });
 
     if (!found) {
@@ -53,7 +53,7 @@ export class SensorService {
     console.log('result', result);
   }
 
-  async updateSensorValue(id: number, value: number): Promise<Sensor> {
+  async updateSensorValue(id: number, value: number): Promise<ReadSensorDto> {
     const sensor = await this.getSensorById(id);
 
     sensor.value = value;
