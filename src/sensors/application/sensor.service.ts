@@ -3,6 +3,7 @@ import { Sensor } from '../persistence/sensor.entity';
 import { SensorRepository } from '../persistence/sensor.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../../auth/persistence/user.entity';
+import { ReadSensorDto } from '../web/dto/read-sensor.dto';
 
 @Injectable()
 export class SensorService {
@@ -11,7 +12,7 @@ export class SensorService {
     private sensorRepository: SensorRepository,
   ) {}
 
-  async getAllSensors(user: User): Promise<Sensor[]> {
+  async getAllSensors(user: User): Promise<ReadSensorDto[]> {
     const query = this.sensorRepository.createQueryBuilder('sensor');
 
     query.where('sensor.user_id = :user_id', { user_id: user.id });

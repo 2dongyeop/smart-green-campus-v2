@@ -19,6 +19,7 @@ import { Sensor } from '../persistence/sensor.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../auth/web/get-user.decorator';
 import { User } from '../../auth/persistence/user.entity';
+import {ReadSensorDto} from "./dto/read-sensor.dto";
 
 @Controller('sensors')
 @UseGuards(AuthGuard())
@@ -27,7 +28,7 @@ export class SensorController {
   constructor(private sensorsService: SensorService) {}
 
   @Get('/')
-  getAllSensors(@GetUser() user: User): Promise<Sensor[]> {
+  getAllSensors(@GetUser() user: User): Promise<ReadSensorDto[]> {
     this.logger.verbose(`User ${user.username} trying to get all sensors`);
     return this.sensorsService.getAllSensors(user);
   }
