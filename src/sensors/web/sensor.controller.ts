@@ -12,13 +12,13 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { SensorService } from './sensor.service';
+import { SensorService } from '../application/sensor.service';
 import { SensorName } from './sensor-name.enum';
 import { SensorNameValidationPipe } from './pipes/sensor-name-validation.pipe';
-import { Sensor } from './sensor.entity';
+import { Sensor } from '../persistence/sensor.entity';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from '../auth/get-user.decorator';
-import { User } from '../auth/user.entity';
+import { GetUser } from '../../auth/get-user.decorator';
+import { User } from '../../auth/user.entity';
 
 @Controller('sensors')
 @UseGuards(AuthGuard())

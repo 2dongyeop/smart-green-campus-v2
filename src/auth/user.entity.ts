@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   Unique,
 } from 'typeorm';
-import { Sensor } from '../sensors/sensor.entity';
+import { Sensor } from '../sensors/persistence/sensor.entity';
 
 @Entity()
 @Unique(['username'])

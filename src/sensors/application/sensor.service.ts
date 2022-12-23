@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Sensor } from './sensor.entity';
-import { SensorRepository } from './sensor.repository';
+import { Sensor } from '../persistence/sensor.entity';
+import { SensorRepository } from '../persistence/sensor.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../auth/user.entity';
+import { User } from '../../auth/user.entity';
 
 @Injectable()
 export class SensorService {

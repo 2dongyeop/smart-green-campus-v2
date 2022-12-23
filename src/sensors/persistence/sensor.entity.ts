@@ -5,8 +5,8 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { SensorName } from './sensor-name.enum';
-import { User } from '../auth/user.entity';
+import { SensorName } from '../web/sensor-name.enum';
+import { User } from '../../auth/user.entity';
 
 @Entity()
 export class Sensor extends BaseEntity {
