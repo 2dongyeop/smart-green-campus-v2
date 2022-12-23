@@ -5,11 +5,11 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { AuthCredentialsDto } from './dto/auth-credentials.dto';
+import { AuthService } from '../application/auth.service';
+import { AuthCredentialsDto } from '../dto/auth-credentials.dto';
 import { GetUser } from './get-user.decorator';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from './user.entity';
+import { User } from '../persistence/user.entity';
 
 @Controller('auth')
 export class AuthController {

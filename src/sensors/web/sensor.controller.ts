@@ -17,8 +17,8 @@ import { SensorName } from './sensor-name.enum';
 import { SensorNameValidationPipe } from './pipes/sensor-name-validation.pipe';
 import { Sensor } from '../persistence/sensor.entity';
 import { AuthGuard } from '@nestjs/passport';
-import { GetUser } from '../../auth/get-user.decorator';
-import { User } from '../../auth/user.entity';
+import { GetUser } from '../../auth/web/get-user.decorator';
+import { User } from '../../auth/persistence/user.entity';
 
 @Controller('sensors')
 @UseGuards(AuthGuard())
