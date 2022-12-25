@@ -11,7 +11,7 @@
     db:
       type: 'postgres'
       port: 15433
-      database: [데이터베이스 이름]
+      database: '데이터베이스 이름'
 
     jwt:
       expiresIn: 3600
@@ -23,12 +23,12 @@
     ```yml
     db:
       host: 'localhost'
-      username: [관리자 이름]
-      password: [관리자 비밀번호]
+      username: '관리자 이름'
+      password: '관리자 비밀번호'
       synchronize: true
 
     jwt:
-      secret: [암호화 키]
+      secret: '암호화 키'
     ```
 
 <br/>
@@ -43,9 +43,9 @@
 
 - `docker/.env`
     ```
-    DB_NAME=[위에서 작성한 dbname]
-    DB_USER=[위에서 작성한 username]
-    DB_PASSWORD=[위에서 작성한 password]
+    DB_NAME=위에서 작성한 dbname
+    DB_USER=위에서 작성한 username
+    DB_PASSWORD=위에서 작성한 password
     POSTGRES_HOME=./postgres
     ```
 
@@ -57,7 +57,7 @@
     services:
       database:
         image: postgres
-        container_name: [도커 컨테이너 이름]
+        container_name: 도커 컨테이너 이름
         environment:
           POSTGRES_DB: "${DB_NAME}"
           POSTGRES_USER: "${DB_USER}"
@@ -77,8 +77,8 @@
     import { PassportStrategy } from '@nestjs/passport';
     import { Strategy } from 'passport-jwt';
     import { InjectRepository } from '@nestjs/typeorm';
-    import { User } from './user.entity';
-    import { UserRepository } from './user.repository';
+    import { User } from './persistence/user.entity';
+    import { UserRepository } from './persistence/user.repository';
     import { ExtractJwt } from 'passport-jwt';
     import * as config from 'config';
     import * as process from 'process';
