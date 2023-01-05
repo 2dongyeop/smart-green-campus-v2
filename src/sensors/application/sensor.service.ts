@@ -4,6 +4,7 @@ import { SensorRepository } from '../persistence/sensor.repository';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../../auth/persistence/user.entity';
 import { ReadSensorDto } from '../web/dto/read-sensor.dto';
+import { UpdateSensorDto } from '../web/dto/update-sensor.dto';
 
 @Injectable()
 export class SensorService {
@@ -43,7 +44,7 @@ export class SensorService {
     return sensor;
   }
 
-  async deleteSensor(id: number, user: User): Promise<void> {
+  async deleteSensor(id: number): Promise<void> {
     const result = await this.sensorRepository.delete(id);
 
     if (result.affected == 0) {
@@ -53,12 +54,21 @@ export class SensorService {
     console.log('result', result);
   }
 
-  async updateSensorValue(id: number, value: number): Promise<ReadSensorDto> {
+  async updateSensorValue(id: number, updateSensorDto: UpdateSensorDto) {
     const sensor = await this.getSensorById(id);
+    const value = updateSensorDto.value;
 
     sensor.value = value;
     await this.sensorRepository.save(sensor);
 
-    return sensor;
+    // return sensor;
+
+    //   await this.sensorRepository
+    //     .createQueryBuilder()
+    //     .update(Sensor)
+    //     .set(updateSensorDto.generateChanges())
+    //     .where('id = :id', { id })
+    //     .execute();
+    // }
   }
 }

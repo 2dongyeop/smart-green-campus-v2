@@ -20,6 +20,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../auth/web/get-user.decorator';
 import { User } from '../../auth/persistence/user.entity';
 import { ReadSensorDto } from './dto/read-sensor.dto';
+import { UpdateSensorDto } from './dto/update-sensor.dto';
 
 @Controller('sensors')
 @UseGuards(AuthGuard())
@@ -55,14 +56,17 @@ export class SensorController {
     @Param('id', ParseIntPipe) id: number,
     @GetUser() user: User,
   ): Promise<void> {
-    return this.sensorsService.deleteSensor(id, user);
+    this.logger.verbose(`User ${user.username} delete sensor id: ${id}.`);
+    return this.sensorsService.deleteSensor(id);
   }
 
-  @Patch('/:id/value')
+  @Patch('/:id')
   updateSensorValue(
     @Param('id', ParseIntPipe) id: number,
-    @Body('value') value: number,
-  ): Promise<ReadSensorDto> {
-    return this.sensorsService.updateSensorValue(id, value);
+    @Body() updateSensorDto: UpdateSensorDto,
+    @GetUser() user: User,
+  ): Promise<void> {
+    this.logger.verbose(`User ${user.username} update sensor id: ${id}.`);
+    return this.sensorsService.updateSensorValue(id, updateSensorDto);
   }
 }
