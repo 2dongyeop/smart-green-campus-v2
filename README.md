@@ -39,6 +39,7 @@
 
 ## Document
 - [Setting files](https://github.com/2dongyeop/smart-green-campus-v2/blob/main/document/setting.md)
+- [API 설계도](https://github.com/2dongyeop/smart-green-campus-v2/blob/main/document/API-list.md)
 
 
 <br/>
