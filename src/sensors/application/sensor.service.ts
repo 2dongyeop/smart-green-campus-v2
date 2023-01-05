@@ -55,20 +55,20 @@ export class SensorService {
   }
 
   async updateSensorValue(id: number, updateSensorDto: UpdateSensorDto) {
-    const sensor = await this.getSensorById(id);
-    const value = updateSensorDto.value;
-
-    sensor.value = value;
-    await this.sensorRepository.save(sensor);
+    // const sensor = await this.getSensorById(id);
+    // const value = updateSensorDto.value;
+    //
+    // sensor.value = value;
+    // await this.sensorRepository.save(sensor);
 
     // return sensor;
 
-    //   await this.sensorRepository
-    //     .createQueryBuilder()
-    //     .update(Sensor)
-    //     .set(updateSensorDto.generateChanges())
-    //     .where('id = :id', { id })
-    //     .execute();
-    // }
+    await this.sensorRepository
+      .createQueryBuilder()
+      .update(Sensor)
+      // .set(updateSensorDto.generateChanges())
+      .set(updateSensorDto.generateChanges())
+      .where('id = :id', { id })
+      .execute();
   }
 }
