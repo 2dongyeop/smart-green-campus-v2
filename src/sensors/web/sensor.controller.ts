@@ -25,7 +25,7 @@ import { UpdateSensorDto } from './dto/update-sensor.dto';
 @Controller('sensors')
 @UseGuards(AuthGuard())
 export class SensorController {
-  private logger = new Logger('BoardController');
+  private logger = new Logger('SensorController');
   constructor(private sensorsService: SensorService) {}
 
   @Get('/')

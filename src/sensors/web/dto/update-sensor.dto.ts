@@ -1,6 +1,6 @@
 export class UpdateSensorDto {
-  location?: object;
-  sensor_name?: string;
+  location?: string;
+  sensor_name?: object;
   value?: number;
   generateChanges(): object {
     return {
