@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Sensor } from '../persistence/sensor.entity';
 import { SensorRepository } from '../persistence/sensor.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../../auth/persistence/user.entity';
+import { User } from '../../user/persistence/user.entity';
 import { ReadSensorDto } from '../web/dto/read-sensor.dto';
 import { UpdateSensorDto } from '../web/dto/update-sensor.dto';
 

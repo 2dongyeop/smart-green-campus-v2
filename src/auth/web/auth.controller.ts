@@ -9,7 +9,7 @@ import { AuthService } from '../application/auth.service';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { GetUser } from './get-user.decorator';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from '../persistence/user.entity';
+import { User } from '../../user/persistence/user.entity';
 
 @Controller('auth')
 export class AuthController {

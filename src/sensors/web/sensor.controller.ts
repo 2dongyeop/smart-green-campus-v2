@@ -18,7 +18,7 @@ import { SensorNameValidationPipe } from './pipes/sensor-name-validation.pipe';
 import { Sensor } from '../persistence/sensor.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../../auth/web/get-user.decorator';
-import { User } from '../../auth/persistence/user.entity';
+import { User } from '../../user/persistence/user.entity';
 import { ReadSensorDto } from './dto/read-sensor.dto';
 import { UpdateSensorDto } from './dto/update-sensor.dto';
 

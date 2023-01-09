@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { SensorName } from '../web/sensor-name.enum';
-import { User } from '../../auth/persistence/user.entity';
+import { User } from '../../user/persistence/user.entity';
 
 @Entity()
 export class Sensor extends BaseEntity {

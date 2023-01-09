@@ -5,8 +5,8 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../persistence/user.entity';
-import { UserRepository } from '../persistence/user.repository';
+import { User } from '../../user/persistence/user.entity';
+import { UserRepository } from '../../user/persistence/user.repository';
 import { AuthCredentialsDto } from '../web/dto/auth-credentials.dto';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
